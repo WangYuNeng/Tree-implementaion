@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <vector>
+#include <string>
 
 class Btree;
 class TreeNode;
@@ -30,6 +31,12 @@ protected:
     // data
     TreeNode *_root;
 
+private:
+    void printInorder ( std::string &outputStr, TreeNode *curNode );
+
+    int _curMaxLevel;
+    void printLeftBoundary ( std::string &outputStr, TreeNode *curNode, int curLevel );
+    
 };
 
 class TreeNode
