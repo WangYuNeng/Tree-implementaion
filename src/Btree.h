@@ -8,10 +8,9 @@
 class Btree;
 class TreeNode;
 
-enum direction: bool {
-    LEFT = false,
-    RIGHT = true
-};
+typedef bool Direction;
+#define LEFT false
+#define RIGHT true
 class Btree
 {
 public:
@@ -22,7 +21,7 @@ public:
 
     // function required by spec
     virtual void insert ( int key ) = 0;
-    void printInorder ( std::ofstream &output );
+    void printPreorder ( std::ofstream &output );
     void printLeftBoundary ( std::ofstream &output );
 
     /*
@@ -35,7 +34,11 @@ protected:
     // data
     TreeNode *_dummy; // _dummy->left = root, _dummy->parent = _dummy
 
-    void printInorder ( std::string &outputStr, TreeNode *curNode );
+    // Basic method inserting one node
+    void insertOne ( TreeNode *newNode );
+    Direction getDirection ( TreeNode *parentNode, TreeNode *childNode );
+
+    void printPreorder ( std::string &outputStr, TreeNode *curNode );
 
     int _curMaxLevel;
     void printLeftBoundary ( std::string &outputStr, TreeNode *curNode, int curLevel );
@@ -53,6 +56,19 @@ public:
     TreeNode () { _left = _right = _parent = nullptr; };
     TreeNode ( int k ) { _left = _right = _parent = nullptr; _key = k; };
     ~TreeNode () {};
+
+    TreeNode*& getChild ( Direction d ) { 
+        if ( d == LEFT)
+            return _left;
+        else
+            return _right;
+    }
+
+    void connectChild ( TreeNode *childNode, Direction d ) {
+        this->getChild(d) = childNode;
+        if ( childNode != nullptr ) 
+            childNode->_parent = this;
+    }
 };
 
 

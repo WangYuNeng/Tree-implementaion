@@ -6,6 +6,7 @@ Btree::Btree ()
 {
     _dummy = new TreeNode;
     _dummy->_parent = _dummy;
+    _dummy->_key = INT32_MAX;
 }
 
 Btree::~Btree ()
@@ -29,14 +30,40 @@ Btree::~Btree ()
     
 }
 
-void Btree::printInorder ( ofstream &output )
+void Btree::insertOne ( TreeNode *newNode )
+{
+
+    TreeNode *curNode, *curParent;
+    Direction parentDirection;
+
+    curNode = _dummy->_left;
+    curParent = _dummy;
+    parentDirection = LEFT;
+
+    while ( curNode != nullptr ) {
+        curParent = curNode;
+        parentDirection =  getDirection( curNode, newNode );
+        curNode = curNode->getChild( parentDirection );
+    }
+    
+    curParent->connectChild( newNode, parentDirection );
+
+}
+
+Direction Btree::getDirection ( TreeNode *node1, TreeNode *node2 )
+{
+    // Return node2 should belong to node1's right child or not
+    return Direction(node1->_key < node2->_key); 
+}
+
+void Btree::printPreorder ( ofstream &output )
 {
     string outputStr = "";
-    printInorder ( outputStr, _dummy->_left );
+    printPreorder ( outputStr, _dummy->_left );
     output << outputStr << endl;;
 }
 
-void Btree::printInorder ( string &outputStr, TreeNode *curNode )
+void Btree::printPreorder ( string &outputStr, TreeNode *curNode )
 {
     outputStr += to_string(curNode->_key);
 
@@ -44,13 +71,13 @@ void Btree::printInorder ( string &outputStr, TreeNode *curNode )
         outputStr += "(";
 
         if ( curNode->_left != nullptr ) {
-            printInorder ( outputStr, curNode->_left );
+            printPreorder ( outputStr, curNode->_left );
         }
         else outputStr += "-";
         outputStr += " ";
 
         if ( curNode->_right != nullptr )
-            printInorder ( outputStr, curNode->_right );
+            printPreorder ( outputStr, curNode->_right );
         else outputStr += "-";
         
         outputStr += ")";

@@ -1,10 +1,10 @@
 CXX=g++
-CPPFLAGS=-O3 -Wall -std=c++11
+CPPFLAGS=-g -Wall -std=c++11
 RM=rm -rf
 OBJS=main.o Btree.o StandardBTree.o SplayTree.o
 
 all: $(OBJS)
-	$(CXX) -o main $(OBJS)
+	$(CXX) -o main.exe $(OBJS)
 
 main.o: main.cpp 
 	$(CXX) -c $(CPPFLAGS) main.cpp

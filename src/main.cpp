@@ -6,20 +6,22 @@
 
 int main(int argc, char const *argv[])
 {
-    Btree *tree = new StandardBTree;
+    Btree *tree = new SplayTree;
+    std::ifstream fin;
     std::ofstream fout;
-    fout.open(argv[1]);
+    int key;
 
-    int input_length, key;
-    std::cin >> input_length;
+    fin.open(argv[1]);
+    fout.open(argv[2]);
 
-    for ( int i = 0; i < input_length; i++ )
-    {
-        std::cin >> key;
+    while ( fin >> key ) {
         tree->insert(key);
-        tree->printInorder( fout );
+        tree->printPreorder( fout );
         tree->printLeftBoundary( fout );
     }
+
+    fin.close();
+    fout.close();
 
     
     return 0;
