@@ -19,4 +19,4 @@ Splaytree.o: Splaytree.cpp Splaytree.h
 	$(CXX) -c $(CPPFLAGS) Splaytree.cpp
 
 clean:
-	$(RM) $(OBJS) main
+	$(RM) $(OBJS) main ../output/*
