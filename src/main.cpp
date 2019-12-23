@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
     ofstream S_bound, S_PRep, S;
     string line;
 
-    bool have_digit=false;
+    bool have_digit;
     int key = 0;
 
     fin.open(argv[1]);
@@ -42,6 +42,9 @@ int main(int argc, char const *argv[])
 
         Btree *btree = new StandardBTree;
         Btree *stree = new SplayTree;
+
+        have_digit = false;
+        key = 0;
         for ( size_t i = 0; i < line.length(); ++i ) {
             cout << int(line[i]) << " ";
             if ( line[i] >= '\x30' and line[i] <= '\x39' ) {
