@@ -58,6 +58,10 @@ int main(int argc, char const *argv[])
             }                      
             // cout << key << " " << line[i] << " " << int(line[i]) << endl << flush;
         }
+        if ( have_digit ){
+            btree->insert(key);
+            stree ->insert(key);
+        }
         cout << endl;
 
         btree->printPreorder( B_PRep );
