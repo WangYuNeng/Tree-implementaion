@@ -99,10 +99,11 @@ void Btree::printLeftBoundary ( ofstream &output )
 
 void Btree::printLeftBoundary ( string &outputStr, TreeNode *curNode, int curLevel )
 {
-    if ( curLevel > _curMaxLevel )
+    if ( curLevel > _curMaxLevel ) {
         outputStr += to_string(curNode->_key);
         outputStr += " ";
         _curMaxLevel += 1;
+    }
 
     if ( curNode->_left != nullptr )
         printLeftBoundary ( outputStr, curNode->_left, curLevel+1 );
@@ -162,9 +163,9 @@ void Btree::printUTF8 ( ofstream &output, string &outputStr )
             utf8Str += "\u0029";
             break;
         case '\n':
-            // utf8Str += "\x0D";
-            // utf8Str += "\x0A";
-            utf8Str += "\u000A";
+            utf8Str += "\x0D";
+            utf8Str += "\x0A";
+            // utf8Str += "\u000A";
             break;
         default:
             break;
