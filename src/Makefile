@@ -1,5 +1,5 @@
 CXX=g++
-CPPFLAGS=-g -Wall -std=c++11
+CPPFLAGS=-O3 -Wall -std=c++11
 RM=rm -rf
 OBJS=main.o Btree.o StandardBTree.o SplayTree.o
 

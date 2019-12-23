@@ -100,8 +100,8 @@ void Btree::printLeftBoundary ( ofstream &output )
 void Btree::printLeftBoundary ( string &outputStr, TreeNode *curNode, int curLevel )
 {
     if ( curLevel > _curMaxLevel ) {
+        if ( curLevel != 0 ) outputStr += " ";
         outputStr += to_string(curNode->_key);
-        outputStr += " ";
         _curMaxLevel += 1;
     }
 
